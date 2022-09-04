@@ -1,0 +1,12 @@
+<div class="w-100  mb-3">
+  <label for="nationalBirt" class=" text-dark  fw-bold ">Enter Your National Id</label>
+  <input type="text" class="form-control " id="nationalBirt" [(ngModel)]="NationalId">
+  <p class="text-success  fw-bold  ">Birth Date: {{NationalId | nationalID}}</p>
+</div>
+<hr>
+<hr>
+<div class="w-100  mb-3">
+  <label for="crd" class=" text-dark fw-bold ">Enter crec</label>
+  <input type="text" class="form-control " id="crd" [(ngModel)]="creditCard">
+  <p class="text-success  fw-bold ">Birth Date: {{creditCard | creditCardNumber}}</p>
+</div>

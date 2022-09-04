@@ -1,0 +1,68 @@
+
+<table class="table m-2">
+  <thead>
+      <tr class="bg-dark text-light">
+        <th scope="col">No.</th>
+        <th scope="col">Date</th>
+        <th scope="col">Name</th>
+        <th scope="col">Image</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price in USD</th>
+        <th scope="col">Price in EGP</th>
+        <th scope="col">Details</th>
+        <th scope="col">Count</th>
+        <th scope="col">Buy</th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+
+        <ng-container *ngFor="let prd of prdListOfCat;let i=index;trackBy:trackByFunc  " >
+      <tr [ngStyle]="{'background-color':(prd.quantity==1)?'yellow':'lightblue'} " [hidden]="prd.quantity==0">
+
+
+          <td>{{i+1}}</td>
+          <td>{{dateDay|date:"mediumDate"}}</td>
+          <td>{{prd.name|uppercase}}</td>
+          <td><img [src]="prd.imgURL" BorderBox="pink" hoverColor="brown" alt=""></td>
+          <td>
+
+              <ng-container [ngSwitch]="prd.quantity">
+                  <ng-container *ngSwitchCase="0">Out Of Stock</ng-container>
+                  <ng-container *ngSwitchCase="1">Last Item</ng-container>
+                  <ng-container *ngSwitchCase="2">Last Two Item</ng-container>
+                  <ng-container *ngSwitchDefault>{{prd.quantity}}</ng-container>
+              </ng-container>
+
+          </td>
+          <td>{{prd.price|currency:'USD':'symbol'}}</td>
+          <td>{{prd.price|usdToEgp:20|currency:'EGP'}}</td>
+          <td><button class="btn btn-primary"(click)="openProductDetails(prd.id)" >Details</button></td>
+          <!-- <td><input type="number"  name="count" class="form-control" placeholder="Count" #itemsCount></td>
+          <td><button class="btn btn-success" [disabled]="prd.quantity==0" (click)="dcreaseQuantity(prd)" (click)="getCatogryData(prd.name,prd.price,itemsCount.value)" (click)="updateTotalPrice(prd.price,itemsCount.value)">Buy</button></td> -->
+          <td><input  placeholder="Count" type="number" name="count" class="form-control" #itemCount></td>
+        <td>
+          <button class="btn btn-success" (click)="dcreaseQuantity(prd , itemCount.value)"
+          (click)="updateTotalPrice(prd.price , itemCount.value)"
+          (click)="getCatogryData(prd.name , prd.price , itemCount.value)">Add To Cart</button>
+        </td>
+      </tr>
+  </ng-container>
+    </tbody>
+</table>
+<br>
+
+<!-- <div class="bg-info">
+  <h2>For test total price: {{orderTotalPrice}}</h2>
+</div> -->
+
+<div class="card" style="width: 18rem;">
+  <img src="\assets\dell.jpg" class="card-img-top" alt="..." *ngIf="showImage"appProductCard>
+  <div class="card-body">
+    <h5 class="card-title">Dell I6</h5>
+    <p class="card-text bg-success" *ngIf="showMsg">Thanks  {{ClintName}}</p>
+    <button  class="btn btn-primary" (click)="toogleImage()" (click)="toogleMsg()" >Buy</button>
+  </div>
+</div>
+
